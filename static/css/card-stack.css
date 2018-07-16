@@ -1,0 +1,25 @@
+.card, .card-stack {
+	width: 130px;
+	height: 202px;
+	position: absolute;
+	/* positioned to begin in the middle */
+	left: 285px; /* (700 / 2) - (130 / 2) */
+	top: 99px; /* (400 / 2) - (202 / 2) */
+}
+
+.card {
+	z-index: 20;
+}
+
+.card-stack {
+	z-index: 10;
+}
+
+#content-container {
+	width: 700px;
+	height: 400px;
+	margin: 20px auto;
+	border: 1px solid black;
+	background-color: #009933;
+	position: relative;
+}
