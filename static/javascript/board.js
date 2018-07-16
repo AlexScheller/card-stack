@@ -52,7 +52,7 @@ $(document).ready(function() {
 	cardList.shuffle();
 	
 	$.fn.handleModelCardDraw = function() {
-		$(this).children('img').attr(
+		$(this).children('.back').children('img').attr(
 			'src', 'static/assets/' + cardList.draw() + '.png'
 		);
 		$(this).unbind('mouseup');
@@ -91,6 +91,8 @@ $(document).ready(function() {
 		});
 	}
 	$('.top-card').on('mouseup', function() {
+		$(this).children('.back').removeAttr('hidden');
+		$(this).removeClass('top-card');
 		$(this).handleModelCardDraw();
 	});
 	$('.top-card').on('mousedown', function() {
@@ -100,12 +102,17 @@ $(document).ready(function() {
 			} else {
 				$('.card-stack').remove();
 			}
-			$(this).removeClass('top-card');
 			$(this).addClass('flipped');
 		}
 	});
 	$('.draggable').draggable({
 		containment: 'parent',
 		stack: '.draggable'
+	});
+	$('.flip-button').on('click', function() {
+		$(this).parent().flip();
+	});
+	$('.card').flip({
+		autoSize: false
 	});
 });

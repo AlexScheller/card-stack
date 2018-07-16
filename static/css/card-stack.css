@@ -11,6 +11,12 @@
 	z-index: 20;
 }
 
+.flip-button {
+	position: absolute;
+	top: -20px;
+	color: white;
+}
+
 .card-stack {
 	z-index: 10;
 }
@@ -19,7 +25,8 @@
 	width: 700px;
 	height: 400px;
 	margin: 20px auto;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border-radius: 3px;
 	background-color: #009933;
 	position: relative;
 }
