@@ -15,6 +15,21 @@
 	display: none;
 }
 
+.card i {
+	color: white;
+	display: none;
+	position: absolute;
+	top: -15px;
+}
+
+.card:hover i {
+	display: block;
+}
+
+/*i:hover {
+	display: block;
+}*/
+
 #content-container {
 	width: 700px;
 	height: 400px;

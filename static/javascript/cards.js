@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+	/*
+	 * "deck" is just a wrapper for an array
+	 * giving it more thematic verbs, and
+	 * including a shuffle.
+	 */
 	let deck = {
 		cards: [],
 		isEmpty: function() {
@@ -53,10 +59,23 @@ $(document).ready(function() {
 	deck.add('c5');
 	deck.shuffle();
 
+	$.fn.flipCard = function() {
+		$(this).toggleClass('front-showing');
+		$(this).toggleClass('back-showing');
+	}
+
+	/* 
+	 * if there are cards left in the deck,
+	 * a card is assigned as a card spawner.
+	 * note that cardSpawner and cardSetup
+	 * are mutually recursive (on handlers).
+	 */
 	$.fn.cardSpawner = function() {
-		$(this).on('mousedown', function() {
+		$(this).one('mousedown', function() {
+			console.log('haha clicked me');
 			$newCard = $(`
 				<div class="card back-showing draggable">
+					<i class="fas fa-sync-alt flip-button"></i>
 					<div class="back">
 						<img src="static/assets/cardback.png">
 					</div>
@@ -80,10 +99,13 @@ $(document).ready(function() {
 		if (!deck.isEmpty()) {
 			$(this).cardSpawner();
 		}
-		$(this).on('mouseup', function() {
+		$(this).one('mouseup', function() {
 			$(this).removeClass('prototype');
 			$(this).removeClass('back-showing');
 			$(this).addClass('front-showing');
+		});
+		$(this).children('.flip-button').on('click', function() {
+			$(this).parent().flipCard();
 		});
 		$(this).draggable({
 			containment: 'parent',
