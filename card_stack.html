@@ -5,27 +5,22 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="static/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="static/css/card-stack.css">
+		<link rel="stylesheet" type="text/css" href="static/css/cards.css">
 	</head>
 	<body>
 		<div id="content-container" class="draggable-bounds">
-			<div class="card top-card draggable">
-				<i class="fas fa-sync-alt flip-button"></i>
+			<div class="card back-showing prototype draggable">
+				<div class="back">
+					<img src="static/assets/cardback.png">
+				</div>
 				<div class="front">
-					<img src="static/assets/cardback.png">
+					<img src="static/assets/d2.png">
 				</div>
-				<div class="back" hidden="">
-					<img src="static/assets/cardback.png">
-				</div>
-			</div>
-			<div class="card-stack">
-				<img src="static/assets/cardback.png">
 			</div>
 		</div>
+		<!-- js -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-		<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
-		<script src="static/javascript/board.js"></script>
+		<script src="static/javascript/cards.js"></script>
 	</body>
 </html>

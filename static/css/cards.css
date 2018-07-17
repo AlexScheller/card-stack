@@ -1,4 +1,4 @@
-.card, .card-stack {
+.card {
 	width: 130px;
 	height: 202px;
 	position: absolute;
@@ -7,18 +7,12 @@
 	top: 99px; /* (400 / 2) - (202 / 2) */
 }
 
-.card {
-	z-index: 20;
+.front-showing .front, .back-showing .back {
+	display: block;
 }
 
-.flip-button {
-	position: absolute;
-	top: -20px;
-	color: white;
-}
-
-.card-stack {
-	z-index: 10;
+.front-showing .back, .back-showing .front {
+	display: none;
 }
 
 #content-container {
