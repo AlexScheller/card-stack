@@ -64,6 +64,23 @@ $(document).ready(function() {
 		$(this).toggleClass('back-showing');
 	}
 
+	$.fn.finalizeDrawnCard = function() {
+		// NOTE that although for the purposes of
+		// this demonstration, cards are no longer
+		// droppables when finally drawn, it may make
+		// sense for them to remain droppable in order
+		// to become new piles or whatever.
+		$(this).droppable('disable');
+		$(this).removeClass('finalization-pending');
+		$(this).removeClass('back-showing');
+		$(this).addClass('front-showing');
+		$flipButton = $('<i class="fas fa-sync-alt flip-button"></i>');
+		$flipButton.on('click', function() {
+			$(this).parent().flipCard();
+		});
+		$(this).prepend($flipButton);
+	}
+
 	/* 
 	 * if there are cards left in the deck,
 	 * a card is assigned as a card spawner.
@@ -72,10 +89,10 @@ $(document).ready(function() {
 	 */
 	$.fn.cardSpawner = function() {
 		$(this).one('mousedown', function() {
-			console.log('haha clicked me');
+			$(this).addClass('finalization-pending');
+			$(this).removeClass('prototype');
 			$newCard = $(`
 				<div class="card back-showing draggable">
-					<i class="fas fa-sync-alt flip-button"></i>
 					<div class="back">
 						<img src="static/assets/cardback.png">
 					</div>
@@ -92,7 +109,31 @@ $(document).ready(function() {
 		});
 	}
 
+	$.fn.topOfDeckSetup = function() {
+		$(this).droppable({
+			hoverClass: "hovered-over",
+			over: function(event, ui) {
+				if (!$(ui.draggable).hasClass('finalization-pending') &&
+					$(ui.draggable).hasClass('front-showing')) {
+					$(ui.draggable).addClass('hover-flip');
+					$(ui.draggable).flipCard();
+				}
+			},
+			out: function(event, ui) {
+				if (!$(ui.draggable).hasClass('finalization-pending') &&
+					$(ui.draggable).hasClass('hover-flip')) {
+					$(ui.draggable).removeClass('hover-flip');
+					$(ui.draggable).flipCard();
+				}
+			},
+			drop: function(event, ui) {
+				console.log("dropped on me!");
+			}
+		});
+	}
+
 	$.fn.cardSetup = function() {
+		$(this).topOfDeckSetup();
 		$(this).children('.front').children('img').attr(
 			'src', 'static/assets/' + deck.draw() + '.png'
 		);
@@ -100,9 +141,7 @@ $(document).ready(function() {
 			$(this).cardSpawner();
 		}
 		$(this).one('mouseup', function() {
-			$(this).removeClass('prototype');
-			$(this).removeClass('back-showing');
-			$(this).addClass('front-showing');
+			$(this).finalizeDrawnCard();
 		});
 		$(this).children('.flip-button').on('click', function() {
 			$(this).parent().flipCard();
